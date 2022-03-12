@@ -64,8 +64,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
+  let {openClicked, drawerClicked} = props;
+  console.log("open click: ", openClicked);
   return (
     <>
         <AppBar position="fixed" className={classes.appBar}>
@@ -74,7 +76,7 @@ const Header = () => {
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-              
+                onClick={openClicked}
                 edge="start"
               >
                 <MenuIcon />
@@ -85,7 +87,7 @@ const Header = () => {
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
-
+                onClick={drawerClicked}
                 edge="start"
               >
                 <MenuIcon />

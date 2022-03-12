@@ -3,7 +3,7 @@ import Mern from "../../assets/Images/Mern.png";
 import { Link } from "react-router-dom";
 import {useMediaQuery} from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Button, Box, Typography, Paper } from "@material-ui/core";
+import { Grid, Button, Box, Typography } from "@material-ui/core";
 
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 
@@ -23,6 +23,7 @@ import Feedback from "../Feedback/Feedback"
 import Fade from 'react-reveal/Fade';
 import Rotate from 'react-reveal/Rotate';
 import Flip from 'react-reveal/Flip';
+import Footer from '../Footer/Footer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -152,6 +153,7 @@ const DashBoard = () => {
       <Flip left>
         <Feedback />
       </Flip>
+      <Footer />
     </>
   )
 }

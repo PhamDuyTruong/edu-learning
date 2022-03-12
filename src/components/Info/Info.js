@@ -38,7 +38,7 @@ const Info = () => {
   const classes = useStyles();
   return (
     <Box display="flex" className={classes.container} justifyContent="space-around" alignItems="center">
-       <Grid container pl={8}>
+       <Grid container pl={5}>
            <Grid item>
             <Box mx={5} minWidth={315} className={classes.sectionChoose} justifyContent="center">
               <Box>
@@ -75,7 +75,7 @@ const Info = () => {
               </Box>
            </Grid>
            <Grid item className={classes.hide}>
-               <Box minWidth={700}>
+               <Box minWidth={500}>
                   <img className={classes.img} src={onlCourse} alt="Online Course"/>
               </Box>
            </Grid>
