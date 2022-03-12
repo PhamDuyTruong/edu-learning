@@ -16,6 +16,14 @@ import course5 from "../../assets/Images/MERN-Stack-Development.png";
 
 import Feature from "../Feature/Feature";
 import Info from "../Info/Info"
+import CarouselItem from '../CarouselItem/Carousel';
+import Description from '../Description/Description';
+import Feedback from "../Feedback/Feedback"
+
+import Fade from 'react-reveal/Fade';
+import Rotate from 'react-reveal/Rotate';
+import Flip from 'react-reveal/Flip';
+
 
 const useStyles = makeStyles((theme) => ({
   carouselHeader:{
@@ -132,9 +140,18 @@ const DashBoard = () => {
            <CarouselModal isResponsive={matchSM} setIsOpen={setIsOpen} isOpen={isOpen} />
           </Grid>
       </Grid>
-      <Feature />
+      <Fade left>
+         <Feature />
+      </Fade>
       <Box style={{height:"100px"}}></Box>
-      <Info />
+      <Rotate top left>
+        <Info />
+      </Rotate>
+      <CarouselItem />
+      <Description />
+      <Flip left>
+        <Feedback />
+      </Flip>
     </>
   )
 }

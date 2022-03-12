@@ -47,7 +47,7 @@ const Feature = () => {
   const classes = useStyles();
   return (
     <Box pb={8} className={classes.container}>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justifyContent="space-between" alignItems="center">
          {featureList.map((item) =>{
           return (
              <Box key={item.id} display="flex" m={2} alignItems="center" className={classes.borderBox}>

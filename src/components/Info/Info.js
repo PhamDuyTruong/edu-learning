@@ -23,6 +23,13 @@ const useStyles = makeStyles((theme) => ({
     },
     sectionChoose:{
         paddingTop: "65px"
+    },
+    buttonSign:{
+      "&:hover":{
+        color: "#F0A500",
+        transition: "all 1s",
+        fontWeight: "700",
+      }
     }
 
 }))
@@ -53,6 +60,7 @@ const Info = () => {
                   component={Link}
                   to={"/"}
                   style={{ width: 150 }}
+                  className={classes.buttonSign}
                 >
                   Sign up
                 </Button>
