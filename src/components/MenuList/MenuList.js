@@ -48,10 +48,10 @@ const useStyles = makeStyles((theme) =>({
 const MenuList = (props) => {
     const classes = useStyles();
     let {history, close} = props
-    console.log(close);
     const [index, setIndex] = useState(history.location.pathname);
     const {sideOpen, sideDraw} = useSelector((state) => state.addSidebar);
     let collapsed = !sideOpen;
+
 
     const dispatch = useDispatch()
     

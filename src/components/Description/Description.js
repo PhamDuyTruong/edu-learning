@@ -9,10 +9,9 @@ const useStyles = makeStyles((theme)=>({
     container:{
         position: "relative",
         height: "115vh",
-        background: `linear-gradient(45deg, #0099ff 50%, white 50%)`,
         outline: "black",
         animation: `5s ease 0s infinite normal none running Gradient`,
-        color: "white",
+        //color: "white",
     },
     title:{
         lineHeight: "85%",
@@ -35,11 +34,12 @@ const useStyles = makeStyles((theme)=>({
 
 
 
-const Description = () => {
+const Description = ({isTheme}) => {
+  //console.log("Theme in D: ", isTheme)
   const classes = useStyles(); 
 
   return (
-    <Box className={classes.container}>
+    <Box className={classes.container} style={{ background: `linear-gradient(45deg, #0099ff 50%, ${isTheme ? "#9e9e9e 50%": "white 50%"}`}}>
         <Box  display="flex" flexDirection="column" flexWrap="nowrap" pt={5} pb={5}>
             <Flip left>
              <Box alignSelf="flex-start" maxWidth={500} m={5}>

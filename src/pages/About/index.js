@@ -141,6 +141,8 @@ const About = React.memo(function AboutInfo() {
                                           color="default"
                                           deleteIcon={<DoneIcon />}
                                           variant="outlined"
+                                          component="a"
+                                          href={item.link}
                                         >                                            
                                         </Chip>
                                     )

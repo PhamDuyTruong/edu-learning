@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TabPanel({children, tabNum, index, ...other}){
-      console.log("Tabnum: ", tabNum, index);
       return(
         <div 
           role="tabpanel"
@@ -45,7 +44,6 @@ const CourseList = () => {
   const [tabNum, setTabNum] = useState(0);
   const {courses, isLoading} = useSelector((state) => state.courses);
   const {coursesIndex, isLoadingCourses} = useSelector((state) => state.coursesIndex);
-  console.log(courses);
   const dispatch = useDispatch();
   const onFetchCourse = (index) =>{
     dispatch(getCoursesByCategory(index));

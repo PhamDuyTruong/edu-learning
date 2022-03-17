@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Mern from "../../assets/Images/Mern.png";
 import { Link } from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux"
 import {useMediaQuery} from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Box, Typography } from "@material-ui/core";
@@ -119,9 +120,16 @@ const CarouselModal = ({isResponsive, isOpen, setIsOpen}) =>{
 
 
 const DashBoard = () => {
+  const {darkTheme} = useSelector((state) => state.darktheme)
   const classes = useStyles();
   const matchSM = useMediaQuery("(min-width: 600px)")
   const [isOpen, setIsOpen] = useState({open : false});
+  const themeInLocal = JSON.parse(localStorage.getItem("darkTheme"));
+
+  let isTheme = darkTheme;
+  if(!darkTheme){
+    isTheme = themeInLocal;
+  }
 
   const handleClick = () =>{
     setIsOpen({open : true});
@@ -143,29 +151,29 @@ const DashBoard = () => {
           </Grid>
       </Grid>
       <Fade left>
-         <Feature />
+         <Feature isTheme={isTheme}/>
       </Fade>
-      <Box my={5} style={{ minHeight: 520 }}>
+      <Box my={`${isTheme ? "0" : "5"}`} style={{ minHeight: 520, background: `${isTheme ? "#303030" :""}` }}>
         <Box mx={6} py={3}>
-          <Typography variant="h5" gutterBottom>
-            <strong>The world's most useless selection of courses</strong>
+          <Typography variant="h5" gutterBottom style={{color: `${isTheme ? "white": ""}`}}>
+            <strong>The world's most useful selection of courses</strong>
           </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            Choose from 1000 online video courses with new additions published
-            every decade
+          <Typography variant="subtitle1" gutterBottom style={{color: `${isTheme ? "white": ""}`}}>
+            Choose from 400 online video courses, even have free courses with new special additions options
+            every year
           </Typography>
         </Box>
         <CourseList />
       </Box>
       <Rotate top left>
-        <Info />
+        <Info/>
       </Rotate>
-      <CarouselItem />
-      <Description />
+      <CarouselItem isTheme={isTheme}/>
+      <Description isTheme={isTheme}/>
       <Flip left>
-        <Feedback />
+        <Feedback isTheme={isTheme}/>
       </Flip>
-      <Footer />
+      <Footer isTheme={isTheme}/>
     </>
   )
 }

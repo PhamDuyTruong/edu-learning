@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Menu, Box, useMediaQuery } from "@material-ui/core";
 import { Button, ButtonGroup, IconButton } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import DarkThemeButton from "./DarkThemeButton";
 
 const useStyles = makeStyles((theme) =>({
     moreIcon:{
@@ -62,9 +64,17 @@ const useStyles = makeStyles((theme) =>({
 
 const DropdownMenu = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
+  const {darkTheme} = useSelector((state) => state.darktheme)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const match = useMediaQuery("(min-width: 960px)")
   const classes = useStyles();
+
+  const ThemeInLocal = JSON.parse(localStorage.getItem("darkTheme"))
+
+  let isTheme = darkTheme;
+  if(!darkTheme){
+    isTheme = ThemeInLocal;
+  }
   const renderMenu = (<Box display="flex" flexDirection={match ? "row": "column"} alignItems="center" m={match ? 0 : 1} minWidth={match ? 0 : 180}>
         <Box flexDirection="column" className={classes.Hide}>
             <ul style={{listStyleType:"none"}}>
@@ -76,6 +86,9 @@ const DropdownMenu = () => {
                 </li>
             </ul>
         </Box>
+        <Box m={match ? 0 : 1}>
+            <DarkThemeButton />
+         </Box>
         <ButtonGroup disableElevation variant="contained" size="small">
          <Button
           color ="primary"

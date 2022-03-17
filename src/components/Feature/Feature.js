@@ -7,7 +7,6 @@ import {VideoLibrary, AssignmentTurnedIn, Alarm} from "@material-ui/icons"
 const useStyles = makeStyles((theme) => ({
     container:{
         position: "relative",
-        background: "linear-gradient(90deg, #B8FFF9 50%, white 50%)",
         minHeight: "25vh",
 
     },
@@ -43,10 +42,11 @@ const featureList = [
    }
 ]
 
-const Feature = () => {
+const Feature = ({isTheme}) => {
+  //console.log("theme in Feature: ", isTheme);
   const classes = useStyles();
   return (
-    <Box pb={8} className={classes.container}>
+    <Box pb={8} className={classes.container} style={{background: `linear-gradient(90deg, #B8FFF9 50%, ${isTheme ? "#303030 50%" : "white 50%"}`}}>
       <Grid container justifyContent="space-between" alignItems="center">
          {featureList.map((item) =>{
           return (

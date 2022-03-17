@@ -34,9 +34,10 @@ const carouselList = [
 
 
 
-const CarouselItem = () => {
+const CarouselItem = ({isTheme}) => {
+  //console.log("Theme in Carousel: ", isTheme)
   return (
-    <Box  my={5} display="flex" alignContent="center" justifyContent="center">
+    <Box  my={`${isTheme ? 0 : 5}`} display="flex" alignContent="center" justifyContent="center" style={{backgroundColor: `${isTheme ? "#9e9e9e": "white"}`}}>
         <Box width="100vh">
             <Carousel animation={"fade"}  timeout={500} indicators={false} >
                 {carouselList.map((item) => (

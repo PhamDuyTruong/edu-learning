@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-
+import {useSelector} from 'react-redux';
 import { Box, Divider, Hidden, Menu } from "@material-ui/core";
 import { Drawer, SwipeableDrawer } from "@material-ui/core";
 
@@ -36,8 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = ({openSidebar, drawSidebar, handleOpen, handleClose}) => {
   const classes = useStyles();
+  const {darkTheme} = useSelector((state) => state.darktheme);
+  const ThemeInLocal = JSON.parse(localStorage.getItem("darkTheme"))
+  let isTheme = darkTheme;
+  if(!darkTheme){
+     isTheme = ThemeInLocal
+  }
   const renderMenu = (
-      <Box display="flex" flexDirection="column" height="100vh">
+      <Box display="flex" flexDirection="column" height="100vh" style={{background: `${isTheme ? "#9e9e9e" : ""}`}}>
          <Box flexGrow={1}>
             <MenuList close={handleClose}/>
          </Box>

@@ -47,7 +47,8 @@ const feedbackItem = [
 ]
 
 
-const Feedback = () => {
+const Feedback = ({isTheme}) => {
+  //console.log("Theme in Feedback: ", isTheme);
   let settings = {
         dots: true,
         infinite: true,
@@ -58,7 +59,7 @@ const Feedback = () => {
       };
     
   return (
- <div className="feedback">
+ <div className="feedback" style={{background: `${isTheme ? "#9e9e9e": ""}`, marginTop: `${isTheme ? "0px" : "25px"}`}}>
   <div className="feedback_container container-fluid" style={{height: "330px"}}>
     <h2 style={{paddingBottom:"5px"}}>What our students have to say</h2>
     <div className="feedback_item">

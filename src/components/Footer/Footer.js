@@ -1,9 +1,9 @@
 import React from "react";
 import "../../Styles/footer.css"
 
-const Footer = () => {
+const Footer = ({isTheme}) => {
   return (
-    <footer className="container-fluid pt-5">
+    <footer className="container-fluid pt-5" style={{background: `linear-gradient(90deg, #0099ff 50%, ${isTheme ? "#9e9e9e 50%" : "white 50%"})`}}>
       <div className="footer_container">
         <div className="footer_content mb-4">
           <div className="row">
@@ -46,13 +46,13 @@ const Footer = () => {
             <div className="col-sm-3">
               <ul className="link">
                 <li>
-                  <a href="#">Affiliate</a>
+                  <a href="#" style={{color: `${isTheme ? "white": "#007791"}`}}>Affiliate</a>
                 </li>
                 <li>
-                  <a href="#">Sitemap</a>
+                  <a href="#" style={{color: `${isTheme ? "white": "#007791"}`}}>Sitemap</a>
                 </li>
                 <li>
-                  <a href="#">Features Courses</a>
+                  <a href="#" style={{color: `${isTheme ? "white": "#007791"}`}}>Features Courses</a>
                 </li>
               </ul>
             </div>
@@ -63,7 +63,7 @@ const Footer = () => {
                   href="#"
                   role="button"
                   id="dropdownMenuLink"
-                  data-toggle="dropdown"
+                  data-bs-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
