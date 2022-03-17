@@ -18,7 +18,8 @@ import Feature from "../Feature/Feature";
 import Info from "../Info/Info"
 import CarouselItem from '../CarouselItem/Carousel';
 import Description from '../Description/Description';
-import Feedback from "../Feedback/Feedback"
+import Feedback from "../Feedback/Feedback";
+import CourseList from '../../pages/CourseList/CourseList';
 
 import Fade from 'react-reveal/Fade';
 import Rotate from 'react-reveal/Rotate';
@@ -144,7 +145,18 @@ const DashBoard = () => {
       <Fade left>
          <Feature />
       </Fade>
-      <Box style={{height:"100px"}}></Box>
+      <Box my={5} style={{ minHeight: 520 }}>
+        <Box mx={6} py={3}>
+          <Typography variant="h5" gutterBottom>
+            <strong>The world's most useless selection of courses</strong>
+          </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Choose from 1000 online video courses with new additions published
+            every decade
+          </Typography>
+        </Box>
+        <CourseList />
+      </Box>
       <Rotate top left>
         <Info />
       </Rotate>

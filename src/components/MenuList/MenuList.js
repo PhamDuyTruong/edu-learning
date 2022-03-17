@@ -82,7 +82,25 @@ const MenuList = (props) => {
           </Link>
         </div>
      )
-   })
+   });
+
+   const About = React.forwardRef(function Component(props, ref){
+    return(
+       <div {...props} ref={ref}>
+         <Link to="/about" className={classes.navlink}>
+           <GmailSidebarItem
+           classes={{ collapsed: classes.collapsed, root: classes.root }}
+           color={"#0099ff"}
+           startIcon={<Info className={classes.navIcon} />}
+           label={"About"}
+           amount={""}
+           {...commonProps("/about")}
+           dotOnCollapsed={false}
+          />
+         </Link>
+       </div>
+    )
+  });
 
   return (
     <Box 
@@ -106,6 +124,9 @@ const MenuList = (props) => {
       <List style={{marginLeft: "-9px"}}>
           <Tooltip title="Dashboard">
               <DashBoard />
+          </Tooltip>
+          <Tooltip title="About">
+              <About />
           </Tooltip>
       </List>
     </Box>

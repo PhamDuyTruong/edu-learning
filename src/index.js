@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import "./Styles/App.css"
 import reportWebVitals from './reportWebVitals';
 
 // Set up Store
