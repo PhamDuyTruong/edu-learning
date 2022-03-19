@@ -12,6 +12,12 @@ const coursesAPI ={
             maNhom: group
         } 
         return axiosClient.get("/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc", {params});      
+    },
+    getDetailCourse: (courseId) =>{
+        const params = {
+            maKhoaHoc: courseId
+        }
+        return axiosClient.get("/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc="+params.maKhoaHoc)
     }
 };
 

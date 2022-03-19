@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import About from "./pages/About";
+import CourseDetail from "./pages/CourseDetail/CourseDetail";
 import Home from "./pages/Home";
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
                          </Route>
                          <Route path="/about">
                               <About />
+                         </Route>
+                         <Route path="/courses/:id">
+                             <CourseDetail />
                          </Route>
                       </Switch>
                  </AppLayout>

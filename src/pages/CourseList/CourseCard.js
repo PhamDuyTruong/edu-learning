@@ -48,7 +48,7 @@ const CourseCard = ({course}) => {
     }
   return (
     <Card className={classes.container}>
-        <CardActionArea>
+        <CardActionArea component={Link} to={`/courses/${course.maKhoaHoc}`}>
            <CardMedia className={classes.media} image={course.hinhAnh} title={course.tenKhoaHoc}/>
           <CardContent>
              <Typography className={classes.title} gutterBottom variant='subtitle2' component="h5">
