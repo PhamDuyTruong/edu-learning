@@ -4,6 +4,7 @@ import coursesReducer from "./coursesReducer";
 import coursesIndexReducer from "./coursesIndexReducer"
 import addDarkTheme from "./darkThemeReducer"
 import courseDetail from "./courseDetail";
+import courseAll from "./CourseAllReducer";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     courses: coursesReducer,
     coursesIndex: coursesIndexReducer,
     darktheme: addDarkTheme,
-    courseDetail: courseDetail
+    courseDetail: courseDetail,
+    courseAll: courseAll
 });
 
 export default rootReducer;

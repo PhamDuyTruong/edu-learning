@@ -45,13 +45,16 @@ const CourseList = () => {
   const {courses, isLoading} = useSelector((state) => state.courses);
   const {coursesIndex, isLoadingCourses} = useSelector((state) => state.coursesIndex);
   const dispatch = useDispatch();
+
+  useEffect(() =>{
+    dispatch(getCoursesIndex());
+  }, [getCoursesIndex]);
+  
   const onFetchCourse = (index) =>{
     dispatch(getCoursesByCategory(index));
   }
   
-  useEffect(() =>{
-    dispatch(getCoursesIndex());
-  }, [getCoursesIndex]);
+  
 
   const handleChange = (_, newValue) =>{
       setTabNum(newValue);

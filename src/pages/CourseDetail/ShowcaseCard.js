@@ -42,9 +42,10 @@ const useStyles = makeStyles(() => ({
     width: "100%",
     height: "3rem",
     border: "none",
-    background: "linear-gradient(45deg, gold 50%, black 50%)",
+    background: "linear-gradient(45deg, #4D96FF 50%, black 50%)",
     backgroundSize: "250%",
     color: "#fff",
+    fontWeight: 700,
     outline: "none",
     transition: "0.5s",
     cursor: "pointer",
@@ -60,7 +61,6 @@ const ShowcaseCard = ({ courseId, image, loading }) => {
   const mediaStyles = useSlopeCardMediaStyles();
   const shadowStyles = useSoftRiseShadowStyles();
   const { enqueueSnackbar } = useSnackbar();
-
   const infoList = [
     { icon: <FindInPageIcon fontSize="small" />, text: "1 article" },
     {

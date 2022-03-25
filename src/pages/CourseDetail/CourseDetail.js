@@ -15,6 +15,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { getCourseDetail } from "../../actions/CourseDetailAction";
 
 import ShowcaseCard from "./ShowcaseCard";
+import CourseTab from "./CourseTab";
 
 const useStyles = makeStyles((theme) => ({
   position: {
@@ -41,16 +42,17 @@ const CourseDetail = (props) => {
   const { courseDetail, loading, error } = useSelector(
     (state) => state.courseDetail
   );
-  console.log("course Detail: ", courseDetail)
   const { match } = props;
   const [onShow, setOnShow] = useState(false);
 
-  const onCourseDetail = (courseId) => {
-    getCourseDetail(courseId);
-  };
-
+  let nguoiTao;
+  if (courseDetail.nguoiTao) {
+    nguoiTao = courseDetail.nguoiTao.hoTen;
+  }
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    onCourseDetail(match.params.id);
+    dispatch(getCourseDetail(match.params.id));
   }, [match.params.id]);
 
   return (
@@ -78,7 +80,7 @@ const CourseDetail = (props) => {
                   <Skeleton variant="text" width={"50%"} />
                 ) : (
                   <Grid container alignItems="center">
-                    <Box mr={3}>Created by </Box>
+                    <Box mr={3}>Created by {nguoiTao} </Box>
                     <Box>Last updated {courseDetail.ngayTao}</Box>
                   </Grid>
                 )}
@@ -86,6 +88,7 @@ const CourseDetail = (props) => {
             </Box>
           </Grid>
         </Box>
+        <CourseTab />
       </Grid>
       <Grid item xs={matchMD ? 4 : 12}>
         <Box mx={2} className={classes.position}>
@@ -96,6 +99,7 @@ const CourseDetail = (props) => {
             courseId={match.params.id}
           />
         </Box>
+        
       </Grid>
     </Grid>
   );

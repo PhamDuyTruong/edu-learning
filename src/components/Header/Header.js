@@ -98,7 +98,7 @@ const Header = (props) => {
                     <Button className={classes.buttonHome} component={Link} to={"/"}>
                         Home
                     </Button>
-                    <Button className={classes.buttonCou} component={Link} to={"/"}>
+                    <Button className={classes.buttonCou} component={Link} to={"/courses"}>
                         Courses
                     </Button>
                 </div>
