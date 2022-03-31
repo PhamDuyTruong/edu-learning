@@ -5,6 +5,7 @@ import coursesIndexReducer from "./coursesIndexReducer"
 import addDarkTheme from "./darkThemeReducer"
 import courseDetail from "./courseDetail";
 import courseAll from "./CourseAllReducer";
+import getAuth from "./authReducer";
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     coursesIndex: coursesIndexReducer,
     darktheme: addDarkTheme,
     courseDetail: courseDetail,
-    courseAll: courseAll
+    courseAll: courseAll,
+    auth: getAuth
 });
 
 export default rootReducer;
