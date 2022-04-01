@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import About from "./pages/About";
+import Auth from "./pages/Auth";
 import CourseDetail from "./pages/CourseDetail/CourseDetail";
 import Courses from "./pages/Courses/Courses";
 import Home from "./pages/Home";
@@ -23,6 +24,12 @@ function App() {
                          </Route>
                          <Route path="/courses">
                               <Courses />
+                         </Route>
+                         <Route path="/sign-in">
+                              <Auth/>
+                         </Route>
+                         <Route path="/sign-up">
+                              <Auth />
                          </Route>
                       </Switch>
                  </AppLayout>

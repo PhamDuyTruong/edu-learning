@@ -1,5 +1,12 @@
 import {AUTH_LOADING, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT} from '../constants/authConstant';
-import authAPI from "../services/authAPI"
+import authAPI from "../services/authAPI";
+
+
+export const authStart = () => {
+  return {
+    type: AUTH_LOADING,
+  };
+};
 
 export const authSuccess = (authData, message) => {
     return {
