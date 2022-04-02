@@ -155,7 +155,7 @@ const Auth = (props) => {
   const {history, match} = props;
   const dispatch = useDispatch();
   const isSignUp = match && match.url === "/sign-up";
-  console.log("is sign up: ", isSignUp )
+  //console.log("is sign up: ", isSignUp )
   const { enqueueSnackbar } = useSnackbar();
 
   const onAuth = (values, history, isSignUp) =>{

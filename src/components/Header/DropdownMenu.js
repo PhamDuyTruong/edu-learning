@@ -93,7 +93,7 @@ const DropdownMenu = () => {
          <Button
           color ="primary"
           component={Link}
-          to={"/"}
+          to={"/sign-in"}
           className={classes.buttonLogIn}
          >
           Login
@@ -101,7 +101,7 @@ const DropdownMenu = () => {
          <Button
          variant='outlined'
           component={Link}
-          to={"/"}
+          to={"/sign-up"}
           className={classes.buttonSignUp}
          >
           Sign Up

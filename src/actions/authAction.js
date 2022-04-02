@@ -20,30 +20,31 @@ export const auth = (value, history, isSignup) =>{
    return async (dispatch) =>{
        dispatch({type: AUTH_LOADING});
        let authData = {
-           username: value.username,
-           password: value.password
+           taiKhoan: value.username,
+           matKhau: value.password
        }
        if(isSignup){
            authData = {
-               username: value.username,
-               password: value.password,
-               name: value.name,
-               phone: value.phone,
-               groupKey: value.group,
-               email: value.email
+            taiKhoan: value.username,
+            matKhau: value.password,
+            hoTen: value.name,
+            soDT: value.phone,
+            maNhom: value.group,
+            email: value.email,
            }
        }
       try{
         if(isSignup){
-            const {data} = authAPI.register(authData);
+            const {data} = await authAPI.register(authData);
             dispatch(authSuccess(data, "Sign up successfully !!!"))
+            console.log("data", data);
             history.push("/sign-in")
         }
         else{
-            const {dataLogin} = authAPI.login(authData);
-            dispatch(authSuccess(dataLogin, "Log in successfully !!!"));
-            localStorage.setItem("user", JSON.stringify(dataLogin));
-            history.push("/") 
+            const {data} = await authAPI.login(authData);
+            dispatch(authSuccess(data, "Log in successfully !!!"));
+            localStorage.setItem("user", JSON.stringify(data));
+            window.location = "/"
         }
       } catch(e){
           dispatch({
