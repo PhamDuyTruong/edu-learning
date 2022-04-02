@@ -6,6 +6,11 @@ import { Menu, Box, useMediaQuery } from "@material-ui/core";
 import { Button, ButtonGroup, IconButton } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import DarkThemeButton from "./DarkThemeButton";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ArchiveIcon from "@material-ui/icons/Archive";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import AvatarItem from './Avatar';
 
 const useStyles = makeStyles((theme) =>({
     moreIcon:{
@@ -15,9 +20,10 @@ const useStyles = makeStyles((theme) =>({
         color: "#000",
         fontWeight:"700",
         "&:hover":{
-            color: "F05454",
+            color: "#F05454",
         }
     },
+
     buttonLogIn:{
         textTransform: "none",
         fontWeight: "700",
@@ -65,6 +71,10 @@ const useStyles = makeStyles((theme) =>({
 const DropdownMenu = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
   const {darkTheme} = useSelector((state) => state.darktheme)
+  const {token} = useSelector((state) => state.auth);
+  console.log("Token: ", token);
+  let isAuth = token !== null;
+  //console.log("isAuth: ", isAuth);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const match = useMediaQuery("(min-width: 960px)")
   const classes = useStyles();
@@ -75,7 +85,46 @@ const DropdownMenu = () => {
   if(!darkTheme){
     isTheme = ThemeInLocal;
   }
-  const renderMenu = (<Box display="flex" flexDirection={match ? "row": "column"} alignItems="center" m={match ? 0 : 1} minWidth={match ? 0 : 180}>
+  const renderMenu = isAuth ? (
+     <Box display="flex" flexDirection={match ? "row": "column"} alignItems="center" m={match ? 0 : 1} minWidth={match ? 0 : 180}>
+        <Box m={match ? 0 : 1}>
+            <Button
+               disableElevation
+               variant="contained"
+               size="small"
+               startIcon={<ExitToAppIcon />}
+               className={classes.button}
+               component={Link}
+               to={"/logout"}
+               style={{color: "#F56D91"}}
+            >
+              Log out
+            </Button>
+        </Box>
+        <Box my={match? 0 : 1} ml={match ? 1 : 0}>
+          <Button
+           disableElevation
+            color="default"
+           variant={isTheme ? "outlined" : "contained"}
+           size="small"
+           startIcon={<ArchiveIcon />}
+           className={classes.button}
+           component={Link}
+           to={"/"}
+         >
+          My Courses
+         </Button>
+        </Box>
+        <Box m={match ? 0 : 1}>
+            <DarkThemeButton />
+        </Box>
+       <Box m={match ? 0 : 1}>
+        <IconButton disableRipple style={{ padding: 0 }}>
+          <AvatarItem />
+         </IconButton>
+       </Box>
+     </Box>
+  ) : (<Box display="flex" flexDirection={match ? "row": "column"} alignItems="center" m={match ? 0 : 1} minWidth={match ? 0 : 180}>
         <Box flexDirection="column" className={classes.Hide}>
             <ul style={{listStyleType:"none"}}>
                 <li>

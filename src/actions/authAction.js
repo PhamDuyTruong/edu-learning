@@ -44,7 +44,7 @@ export const auth = (value, history, isSignup) =>{
             const {data} = await authAPI.login(authData);
             dispatch(authSuccess(data, "Log in successfully !!!"));
             localStorage.setItem("user", JSON.stringify(data));
-            window.location = "/"
+            history.push("/")
         }
       } catch(e){
           dispatch({

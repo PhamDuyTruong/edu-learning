@@ -5,6 +5,7 @@ import Auth from "./pages/Auth";
 import CourseDetail from "./pages/CourseDetail/CourseDetail";
 import Courses from "./pages/Courses/Courses";
 import Home from "./pages/Home";
+import LogOut from './pages/Logout'
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
                          </Route>
                          <Route path="/courses">
                               <Courses />
+                         </Route>
+                         <Route path="/logout">
+                              <LogOut/>
                          </Route>
                          <Route path="/sign-in">
                               <Auth/>
