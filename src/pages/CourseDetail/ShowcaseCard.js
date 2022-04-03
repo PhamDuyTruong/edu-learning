@@ -19,6 +19,8 @@ import BuildIcon from "@material-ui/icons/Build";
 import { useSoftRiseShadowStyles } from "@mui-treasury/styles/shadow/softRise";
 import { useSlopeCardMediaStyles } from "@mui-treasury/styles/cardMedia/slope";
 
+import {enrollCourse} from "../../actions/UserAction"
+
 const useStyles = makeStyles(() => ({
   container: {
     maxWidth: 310,
@@ -56,11 +58,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ShowcaseCard = ({ courseId, image, loading }) => {
+const ShowcaseCard = ({ isMe, courseId, image, loading }) => {
+  const {error, success} = useSelector((state) => state.user);
   const classes = useStyles();
   const mediaStyles = useSlopeCardMediaStyles();
   const shadowStyles = useSoftRiseShadowStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const dispatch = useDispatch();
+
+  const handleEnroll = (courseId, isMe) =>{
+      dispatch(enrollCourse(courseId, isMe))
+  }
+
+  useEffect(() =>{
+     if(success){
+      enqueueSnackbar(success, { variant: "success" });
+     };
+     if(error){
+      enqueueSnackbar(success, { variant: "error" });
+     }
+  }, [error, success, enqueueSnackbar]);
+
   const infoList = [
     { icon: <FindInPageIcon fontSize="small" />, text: "1 article" },
     {
@@ -95,17 +114,31 @@ const ShowcaseCard = ({ courseId, image, loading }) => {
           Free 50%
         </Typography>
       </Box>
-      <Box mx={2}>
-        <Box
-          component={Link}
-          to={"/sign-in"}
-          style={{ textDecoration: "none" }}
-        >
-          <Button size="small" className={classes.button}>
-            Login to Enroll
+
+       {user && user.accessToken ? (
+        <Box mx={2}>
+          <Button
+            size="small"
+            onClick={() => handleEnroll(courseId, isMe)}
+            className={classes.button}
+          >
+            {isMe ? "Leave this course" : "Enroll Now"}
           </Button>
         </Box>
-      </Box>
+      ) : (
+        <Box mx={2}>
+          <Box
+            component={Link}
+            to={"/sign-in"}
+            style={{ textDecoration: "none" }}
+          >
+            <Button size="small" className={classes.button}>
+              Login to Enroll
+            </Button>
+          </Box>
+        </Box>
+      )}
+
 
       <Box mt={2}>
         <Box ml={2}>

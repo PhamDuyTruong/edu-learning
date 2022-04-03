@@ -72,7 +72,7 @@ const DropdownMenu = () => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
   const {darkTheme} = useSelector((state) => state.darktheme)
   const {token} = useSelector((state) => state.auth);
-  console.log("Token: ", token);
+  //console.log("Token: ", token);
   let isAuth = token !== null;
   //console.log("isAuth: ", isAuth);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);

@@ -6,6 +6,7 @@ import addDarkTheme from "./darkThemeReducer"
 import courseDetail from "./courseDetail";
 import courseAll from "./CourseAllReducer";
 import getAuth from "./authReducer";
+import addUser from "./UserReducer";
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     darktheme: addDarkTheme,
     courseDetail: courseDetail,
     courseAll: courseAll,
-    auth: getAuth
+    auth: getAuth,
+    user: addUser
 });
 
 export default rootReducer;
