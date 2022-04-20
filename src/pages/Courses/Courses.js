@@ -65,12 +65,6 @@ const Courses = () => {
       </Box>
     </Box>
 
-    {/* {courseAll && courseAll.length ? (
-      <Box display="flex" justifyContent="center" m={3}>
-        <DataLength items={courseAll.length} type={"courses"} />
-      </Box>
-    ) : null} */}
-
     <Grid container spacing={2} justifyContent="center">
       {courseListRender}
     </Grid>

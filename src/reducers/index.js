@@ -7,6 +7,7 @@ import courseDetail from "./courseDetail";
 import courseAll from "./CourseAllReducer";
 import getAuth from "./authReducer";
 import addUser from "./UserReducer";
+import addUserDetail from "./UserDetailReducer";
 
 
 const rootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     courseDetail: courseDetail,
     courseAll: courseAll,
     auth: getAuth,
-    user: addUser
+    user: addUser,
+    userDetail: addUserDetail 
 });
 
 export default rootReducer;

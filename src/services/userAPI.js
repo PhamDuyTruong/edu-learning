@@ -12,6 +12,9 @@ const userAPI = {
            maKhoaHoc: courseId
        }
        return axiosClient.get("/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc?maKhoaHoc="+params.maKhoaHoc)
+   },
+   fetchUserDetail: (values) =>{
+       return axiosClient.post("/QuanLyNguoiDung/ThongTinTaiKhoan", values)
    }
 };
 

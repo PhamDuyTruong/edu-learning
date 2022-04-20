@@ -6,6 +6,7 @@ import CourseDetail from "./pages/CourseDetail/CourseDetail";
 import Courses from "./pages/Courses/Courses";
 import Home from "./pages/Home";
 import LogOut from './pages/Logout'
+import UserCourses from "./pages/UserCourses/UserCourses";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
                          </Route>
                          <Route path="/courses">
                               <Courses />
+                         </Route>
+                         <Route path="/user-courses">
+                              <UserCourses />
                          </Route>
                          <Route path="/logout">
                               <LogOut/>
