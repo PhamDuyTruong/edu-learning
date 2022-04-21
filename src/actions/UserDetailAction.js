@@ -2,7 +2,7 @@ import {FETCH_USER_DETAIL_SUCCESS, FETCH_USER_DETAIL_LOADING, FETCH_USER_DETAIL_
 import userAPI from "../services/authAPI";
 
 
-export const fetchUserDetail = () =>{
+export function fetchUserDetail(){
     return async (dispatch) =>{
         dispatch({type: FETCH_USER_DETAIL_LOADING})
         const user = JSON.parse(localStorage.getItem("user"))

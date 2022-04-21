@@ -5,7 +5,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {useDispatch} from 'react-redux';
 import {openSidebar} from "../../actions/addSidebar"
 
-const styledBadges = withStyles((theme) =>({
+const StyledBadges = withStyles((theme) =>({
     badge: {
         backgroundColor: "#44b700",
         color: "#44b700",
@@ -47,7 +47,7 @@ const AvatarItem = () => {
   }
   return (
     <div className={classes.container}>
-        <styledBadges
+        <StyledBadges
           overlap="cỉcle"
           anchorOrigin={{
             vertical: "bottom",
@@ -57,7 +57,7 @@ const AvatarItem = () => {
           onClick={onSideOpen}
         >
           <Avatar alt="Avatar" src="https://i.pravatar.cc/150?img=56" />
-        </styledBadges>
+        </StyledBadges>
     </div>
   )
 }

@@ -110,7 +110,7 @@ const DropdownMenu = () => {
            startIcon={<ArchiveIcon />}
            className={classes.button}
            component={Link}
-           to={"/"}
+           to={"/user-courses"}
          >
           My Courses
          </Button>

@@ -61,8 +61,9 @@ const useStyles = makeStyles(() => ({
 const UserCourses = (props) => {
   const classes = useStyles();
   const {history} = props;
-  const [userDetail, loading] = useSelector((state) => state.userDetail)
-  const [error, success] = useSelector((state) => state.user);
+  const {emplDetail, loading} = useSelector((state) => state.userDetail);
+  console.log(emplDetail)
+  const {error, success} = useSelector((state) => state.user);
   const [isMe, setIsMe] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
@@ -105,11 +106,11 @@ const UserCourses = (props) => {
 
   let CourseRender = <div>Loading...</div>
 
-  if(isMe && userDetail && userDetail.chiTietKhoaHocGhiDanh){
+  if(isMe && emplDetail && emplDetail.chiTietKhoaHocGhiDanh){
         CourseRender = (
             <Box my={5} mx={2}>
                <List dense>
-                    {userDetail.chiTietKhoaHocGhiDanh.map((course, index) =>(
+                    {emplDetail.chiTietKhoaHocGhiDanh.map((course, index) =>(
                         <ListItem  key={`${course.maKhoaHoc}${index}`}>
                             <ListItemAvatar>
                                 <Avatar>
@@ -149,10 +150,10 @@ const UserCourses = (props) => {
              </Typography>
            </Box>
            
-           {isMe && userDetail && userDetail.chiTietKhoaHocGhiDanh ? (
+           {isMe && emplDetail && emplDetail.chiTietKhoaHocGhiDanh ? (
             <Box display="flex" justifyContent="center" mt={3}>
              <DataManage
-              items={userDetail.chiTietKhoaHocGhiDanh.length}
+              items={emplDetail.chiTietKhoaHocGhiDanh.length}
               type={"courses"}
              />
           </Box>
