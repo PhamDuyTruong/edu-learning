@@ -13,7 +13,7 @@ const userAPI = {
        }
        return axiosClient.get("/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc?maKhoaHoc="+params.maKhoaHoc)
    },
-   fetchUserDetail: (values) =>{
+   onFetchUserDetail: (values) =>{
        return axiosClient.post("/QuanLyNguoiDung/ThongTinTaiKhoan", values)
    }
 };

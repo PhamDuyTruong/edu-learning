@@ -10,7 +10,8 @@ export function fetchUserDetail(){
             taiKhoan: user.taiKhoan
         }
         try{
-            const {data} = await userAPI.fetchUserDetail(userData);
+            const {data} = await userAPI.onFetchUserDetail(userData);
+            console.log(data)
             dispatch({type: FETCH_USER_DETAIL_SUCCESS, payload: {data}})
         }catch(e){
             dispatch({
