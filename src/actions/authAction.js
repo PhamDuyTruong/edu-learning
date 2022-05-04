@@ -1,4 +1,4 @@
-import {AUTH_LOADING, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT} from '../constants/authConstant';
+import {AUTH_LOADING, AUTH_SUCCESS, AUTH_FAILED, AUTH_LOGOUT, CHOOSE_GROUP} from '../constants/authConstant';
 import authAPI from "../services/authAPI";
 
 
@@ -37,7 +37,7 @@ export const auth = (value, history, isSignup) =>{
         if(isSignup){
             const {data} = await authAPI.register(authData);
             dispatch(authSuccess(data, "Sign up successfully !!!"))
-            console.log("data", data);
+            //console.log("data", data);
             history.push("/sign-in")
         }
         else{
@@ -70,5 +70,12 @@ export const authCheckState = () => {
       } else {
         dispatch(authSuccess("user"));
       }
+    };
+  };
+
+  export const chooseGroup = (group) => {
+    return {
+      type: CHOOSE_GROUP,
+      group: group,
     };
   };

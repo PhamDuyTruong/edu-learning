@@ -1,30 +1,32 @@
 import * as actionTypes from "../constants/UserManagerConstant";
 import ManageUserAPI from '../services/ManageUserAPI';
 
-export const fetchUsersClick = (selectedCourse, tabIndex) => {
-    return {
-      type: actionTypes.FETCH_INFO_CLICK,
-      tabIndex: tabIndex && Math.abs(tabIndex) !== 1 ? -tabIndex : 2,
-      selectedCourse: selectedCourse,
-    };
+export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
+  return {
+    type: actionTypes.FETCH_INFO_CLICK,
+    tabIndex: tabIndex && Math.abs(tabIndex) !== 1 ? -tabIndex : 2,
+    isEdit: false,
+    selectedUser: selectedUser,
+    avatarIndex: avatarIndex,
   };
-  
-  export const editCourseClick = (selectedCourse, tabIndex) => {
-    return {
-      type: actionTypes.EDIT_USER_CLICK,
-      tabIndex: tabIndex && Math.abs(tabIndex) !== 2 ? -tabIndex : 1,
-      isEdit: true,
-      selectedCourse: selectedCourse,
-    };
+};
+
+export const editUserClick = (selectedUser, tabIndex) => {
+  return {
+    type: actionTypes.EDIT_USER_CLICK,
+    tabIndex: tabIndex && Math.abs(tabIndex) !== 2 ? -tabIndex : 1,
+    isEdit: true,
+    selectedUser: selectedUser,
   };
-  
-  export const addCourseClick = () => {
-    return {
-      type: actionTypes.ADD_USER_CLICK,
-      tabIndex: -1,
-      isEdit: false,
-    };
+};
+
+export const addUserClick = () => {
+  return {
+    type: actionTypes.ADD_USER_CLICK,
+    tabIndex: -1,
+    isEdit: false,
   };
+};
 
   export const fetchUser = (group) =>{
       return async (dispatch) =>{
@@ -41,23 +43,23 @@ export const fetchUsersClick = (selectedCourse, tabIndex) => {
   export const fetchCourseApprovalPendingSuccess = (success, selectedUser) => {
     return {
       type: actionTypes.FETCH_COURSE_APPROVAL_PENDING_SUCCESS,
-      success: success,
+      success: {success},
       selectedUser: selectedUser,
     };
   };
 
   export const fetchCourseApprovalPending = (selectedUser) =>{
       return async (dispatch) =>{
-          dispatch({type: actionTypes.APPROVE_COURSE_PENDING_START});
+          dispatch({type: actionTypes.FETCH_COURSE_APPROVAL_PENDING_START});
           const user = JSON.parse(localStorage.getItem("user"));
           const userData = {
             taiKhoan: selectedUser.taiKhoan,
           };
           try{
           const {data} = await ManageUserAPI.onFetchCoursePending(userData);
-          dispatch(fetchCourseApprovalPending({data}, selectedUser))
+          dispatch(fetchCourseApprovalPendingSuccess(data, selectedUser))
       }catch(e){
-          dispatch({type: actionTypes.APPROVE_COURSE_PENDING_FAIL})
+          dispatch({type: actionTypes.FETCH_COURSE_APPROVAL_PENDING_FAIL})
       }
     }
   }
@@ -98,14 +100,14 @@ export const fetchUsersClick = (selectedCourse, tabIndex) => {
           if(isEdit){
             const {data} = await ManageUserAPI.onEditUser(userData);
             dispatch( addUserSuccess(
-                `Cập nhật tài khoản ${response.data.taiKhoan} thành công!`));
+                `Cập nhật tài khoản ${data.taiKhoan} thành công!`));
             dispatch(fetchUser(group));
-            dispatch(editCourseClick({data}, tabIndex))
+            dispatch(editCourseClick(data, tabIndex))
           }else{
               const {data} = await ManageUserAPI.onAddUser(userData);
               dispatch(
                 addUserSuccess(
-                  `Thêm tài khoản ${response.data.taiKhoan} thành công!`
+                  `Thêm tài khoản ${data.taiKhoan} thành công!`
                 )
               );
               dispatch(fetchUser(group));
@@ -119,7 +121,7 @@ export const fetchUsersClick = (selectedCourse, tabIndex) => {
   export const fetchCourseNoneEnrollSuccess = (success, selectedUser) => {
     return {
       type: actionTypes.FETCH_COURSE_NONE_ENROLL_SUCCESS,
-      success: success,
+      success: {success},
       selectedUser: selectedUser,
     };
   };
@@ -129,7 +131,7 @@ export const fetchUsersClick = (selectedCourse, tabIndex) => {
           dispatch({type: actionTypes.FETCH_COURSE_NONE_ENROLL_START});
           try{
              const {data} = await ManageUserAPI.onFetchCourseNoneEnroll(selectedUser);
-             dispatch(fetchCourseNoneEnrollSuccess({data}, selectedUser))
+             dispatch(fetchCourseNoneEnrollSuccess(data, selectedUser))
           }catch(e){
             dispatch({type: actionTypes.FETCH_COURSE_NONE_ENROLL_FAIL});
           }
@@ -150,7 +152,64 @@ export const fetchUsersClick = (selectedCourse, tabIndex) => {
                 dispatch({type: actionTypes.SEARCH_USER_FAIL});
           }
       }
+  };
+
+  export const fetchCourseApprovedSuccess = (success, selectedUser) => {
+    return {
+      type: actionTypes.FETCH_COURSE_APPROVED_SUCCESS,
+      success: {success},
+      selectedUser: selectedUser,
+    };
+  };
+
+  export const  fetchCourseApproved = (selectedUser) =>{
+        return async (dispatch) =>{
+          dispatch({type: actionTypes.FETCH_COURSE_APPROVED_START});
+          const userData = {
+            taiKhoan: selectedUser.taiKhoan,
+          };
+          try{
+              const {data} = ManageUserAPI.onFetchCourseApprove(userData);
+              dispatch(fetchCourseApprovedSuccess(data, selectedUser))
+          }catch(e){
+              dispatch({type: actionTypes.FETCH_COURSE_APPROVED_FAIL})
+          }
+        }
   }
 
+  export const  approveCoursePending = (courseId, selectedUser) =>{
+    return async (dispatch) =>{
+        dispatch({type: actionTypes.APPROVE_COURSE_PENDING_START});
+        const userData = {
+          maKhoaHoc: courseId,
+          taiKhoan: selectedUser.taiKhoan,
+        };
+        try{
+          const {data} = ManageUserAPI.onApproveCoursePending(userData);
+          dispatch({type: actionTypes.APPROVE_COURSE_PENDING_SUCCESS, payload: {data}});
+          dispatch(fetchCourseApprovalPending(selectedUser));
+          dispatch(fetchCourseApproved(selectedUser));
+          dispatch(fetchCourseNoneEnroll(selectedUser));
+        }catch(e){
+          dispatch({type: actionTypes.APPROVE_COURSE_PENDING_FAIL});
+        }
+    }
+}
 
-
+export const disapproveCourse  = (courseId, selectedUser) =>{
+    return async (dispatch) =>{
+      dispatch({type: actionTypes.DISAPPROVE_COURSE_START});
+      const userData = {
+        maKhoaHoc: courseId,
+        taiKhoan: selectedUser.taiKhoan,
+      };
+      try{
+          const {data} = ManageUserAPI.onDisaprovedCourse(userData);
+          dispatch({type: actionTypes.DISAPPROVE_COURSE_SUCCESS, payload: {data}});
+          dispatch(fetchCourseApproved(selectedUser));
+          dispatch(fetchCourseApprovalPending(selectedUser));
+      }catch(e){
+          dispatch({type: actionTypes.DISAPPROVE_COURSE_FAIL})
+      }
+    }
+}

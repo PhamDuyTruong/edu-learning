@@ -1,4 +1,4 @@
-import {AUTH_FAILED, AUTH_LOGOUT, AUTH_LOADING, AUTH_SUCCESS} from '../constants/authConstant';
+import {AUTH_FAILED, AUTH_LOGOUT, AUTH_LOADING, AUTH_SUCCESS, CHOOSE_GROUP} from '../constants/authConstant';
 
 const initialState = {
     token: null,
@@ -7,6 +7,7 @@ const initialState = {
     loading: false,
     accountName: null,
     authRedirectPath: "/",
+    group: "GP08",
 }
 
 function getAuth(state = initialState, action){
@@ -19,6 +20,8 @@ function getAuth(state = initialState, action){
              return {...state, loading: false, success: null}
          case AUTH_LOGOUT:
               return {...state, token: null}
+        case CHOOSE_GROUP:
+            return {...state, group: action.group}
         default: 
            return state;
     }

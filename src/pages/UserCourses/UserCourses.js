@@ -5,6 +5,7 @@ import {Box, Grid, List, ListItemAvatar, Avatar, ListItemText, Tooltip, ListItem
 import { useDispatch, useSelector } from 'react-redux';
 import {enrollCourse} from "../../actions/UserAction";
 import {fetchUserDetail} from "../../actions/UserDetailAction"
+import {fetchUserFail} from '../../actions/UserAction';
 
 import IconButton from "@material-ui/core/IconButton";
 import FolderIcon from "@material-ui/icons/Folder";
@@ -47,11 +48,11 @@ const useStyles = makeStyles(() => ({
       fontWeight: 700,
       background: "linear-gradient(45deg, #4D77FF 50%, white 50%)",
       backgroundClip: "text",
-      color: "transparent",
+      color: "#EB5353",
       transition: "0.5s",
       "&:hover":{
         background: "linear-gradient(45deg, #4D77FF 50%, white 50%)",
-        color: "transparent",
+        color: "#7FB5FF",
         backgroundClip:"text"
       }
   }
@@ -60,11 +61,12 @@ const useStyles = makeStyles(() => ({
 
 const UserCourses = (props) => {
   const classes = useStyles();
-  const {history} = props;
-  const {emplDetail, loading} = useSelector((state) => state.userDetail);
-  console.log(emplDetail)
   const {error, success} = useSelector((state) => state.user);
+  //console.log("data: ", success);
+  const {emplDetail, loading} = useSelector((state) => state.userDetail);
+  //console.log(emplDetail)
   const [isMe, setIsMe] = useState(false);
+  const {history} = props;
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
   const shadowStyles = useSoftRiseShadowStyles();
@@ -73,7 +75,7 @@ const UserCourses = (props) => {
   const handleEnroll = (id, isMe) =>{
       dispatch(enrollCourse(id, isMe))
   }
-  
+ 
   useEffect(() =>{
       if(error){
         enqueueSnackbar(error, {
@@ -92,6 +94,7 @@ const UserCourses = (props) => {
             },
           });
       }
+     
       dispatch(fetchUserDetail());
   }, [error, success, enqueueSnackbar, fetchUserDetail]);
 
@@ -103,6 +106,12 @@ const UserCourses = (props) => {
       }
 
   }, [history.location.pathname, user]);
+
+  useEffect(() => {
+    if (isMe) {
+      dispatch(fetchUserDetail());
+    }
+  }, [fetchUserDetail, isMe]);
 
   let CourseRender = <div>Loading...</div>
 

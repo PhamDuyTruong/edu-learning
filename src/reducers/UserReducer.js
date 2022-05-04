@@ -16,11 +16,11 @@ function addUser(state = initialState, action) {
         case ENROLL_COURSE_FAIL:
             return {...state, error: null, success: null, loading: false}
         case FETCH_USER_LOADING:
-             return {...state, error: null, succes: null, loading: true}
+             return {...state, error: null, success: null, loading: true}
         case FETCH_USER_SUCCESS: 
            return {...state, userList: action.payload.data, success: action.payload.success, loading: false}
         case FETCH_USER_FAIL:
-            return {...state, loading: false}
+            return {...state, success: null, error: null, loading: false}
         default:
             return state
      }

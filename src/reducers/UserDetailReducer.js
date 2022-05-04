@@ -10,9 +10,9 @@ function addUserDetail(state = initialState, action){
         case FETCH_USER_DETAIL_LOADING:
             return {...state, loading: true}
         case FETCH_USER_DETAIL_SUCCESS:
-            return {...state, emplDetail: action.payload.data, loading: false};
+            return {...state,  loading: false, emplDetail: action.userDetail};
         case FETCH_USER_DETAIL_FAIL:
-            return {...state, loading: false}
+            return {...state, loading: true}
         default:
             return state;
     }
