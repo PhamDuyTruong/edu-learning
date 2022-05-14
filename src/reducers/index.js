@@ -9,6 +9,7 @@ import getAuth from "./authReducer";
 import addUser from "./UserReducer";
 import addUserDetail from "./UserDetailReducer";
 import fetchUserManage from "./UserManageReducer";
+import fetchCourseManage from "./CourseManageReducer";
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     auth: getAuth,
     user: addUser,
     userDetail: addUserDetail ,
-    userManage: fetchUserManage
+    userManage: fetchUserManage,
+    courseManage: fetchCourseManage
 });
 
 export default rootReducer;

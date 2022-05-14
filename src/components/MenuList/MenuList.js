@@ -129,8 +129,26 @@ const MenuList = (props) => {
             color={"#0099ff"}
             startIcon={<People className={classes.navIcon} />}
             label={"Users Manage"}
-            amount={969}
+            amount={500}
             {...commonProps("/users-management")}
+            dotOnCollapsed={true}
+          />
+        </Link>
+      </div>
+    );
+  });
+
+  const CoursesManage = React.forwardRef(function MyComponent(props, ref) {
+    return (
+      <div {...props} ref={ref}>
+        <Link to="/courses-management" className={classes.navlink}>
+          <GmailSidebarItem
+            classes={{ collapsed: classes.collapsed, root: classes.root }}
+            color={"#0099ff"}
+            startIcon={<InsertDriveFile className={classes.navIcon} />}
+            label={"Courses Manage"}
+            amount={300}
+            {...commonProps("/courses-management")}
             dotOnCollapsed={true}
           />
         </Link>
@@ -167,8 +185,11 @@ const MenuList = (props) => {
 
           {user && user.maLoaiNguoiDung === "GV" ? (
             <>
-             <Tooltip title="Courses Manage">
+             <Tooltip title="Users Manage">
               <UsersManage />
+             </Tooltip>
+             <Tooltip title="Courses Manage">
+              <CoursesManage />
              </Tooltip>
             </>
           ): null}

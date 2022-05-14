@@ -5,8 +5,6 @@ import FaceIcon from "@material-ui/icons/Face";
 import DoneIcon from "@material-ui/icons/Done";
 
 
-
-
 const DataManage = ({ items, type }) => {
   const [display, setDisplay] = useState(true);
 

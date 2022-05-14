@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import LogOut from './pages/Logout'
 import UserCourses from "./pages/UserCourses/UserCourses";
 import UserManagement from "./pages/UserManager/UserManagement";
+import CourseManagement from './pages/CourseManage/CourseManagement';
 import {auth, authCheckState} from './actions/authAction'
 
 const AdminLayout = ({ Component, isAdmin, ...props }) => {
@@ -28,20 +29,6 @@ const AdminLayout = ({ Component, isAdmin, ...props }) => {
        />
      );
    };
-
-   const RouteUser = ({ Component, ...props }) => {
-     return (
-       <Route
-         {...props}
-         render={() => (
-           <AppLayout>
-             <Component />
-           </AppLayout>
-         )}
-       />
-     );
-   };
-   
 
 
 function App() {
@@ -88,7 +75,11 @@ function App() {
                   Component={UserManagement}
                   isAdmin={isAdmin}
                   />
-                 
+                 <AdminLayout 
+                    path="/courses-management"
+                    Component={CourseManagement}
+                    isAdmin = {isAdmin}
+                 />
             </Route>
          </Switch>
     </BrowserRouter>
