@@ -266,7 +266,7 @@ const UserDetail = () => {
               Pending Courses
             </Typography>
             <Typography className={styles.secondaryHeading}>
-              Need approve to allow the user accessing
+              Need provide info to allow user access
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -288,7 +288,7 @@ const UserDetail = () => {
               Approved Courses
             </Typography>
             <Typography className={styles.secondaryHeading}>
-              The courses have already accessed by user
+              The courses have already accessed by admins
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -310,14 +310,14 @@ const UserDetail = () => {
               Available courses
             </Typography>
             <Typography className={styles.secondaryHeading}>
-              Registing a course quickly for user
+              Registing a course for user
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             {coursesNoneEnrollListRender}
           </ExpansionPanelDetails>
         </ExpansionPanel>
-        {loading ? <Spinner /> : null}
+        {loading ? <div>Loading...</div> : null}
       </Box>
 
       <Box flexGrow={1} alignSelf="flex-start" minWidth={250} m={2}>

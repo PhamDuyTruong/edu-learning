@@ -7,7 +7,7 @@ const initialState = {
     loading: false,
     accountName: null,
     authRedirectPath: "/",
-    group: "GP08",
+    group: "GP01",
 }
 
 function getAuth(state = initialState, action){

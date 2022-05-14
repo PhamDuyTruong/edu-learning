@@ -1,4 +1,6 @@
+import {useEffect} from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {useDispatch} from 'react-redux';
 import AppLayout from "./layouts/AppLayout";
 import About from "./pages/About";
 import Auth from "./pages/Auth";
@@ -8,7 +10,7 @@ import Home from "./pages/Home";
 import LogOut from './pages/Logout'
 import UserCourses from "./pages/UserCourses/UserCourses";
 import UserManagement from "./pages/UserManager/UserManagement";
-
+import {auth, authCheckState} from './actions/authAction'
 
 const AdminLayout = ({ Component, isAdmin, ...props }) => {
      return (
@@ -16,9 +18,9 @@ const AdminLayout = ({ Component, isAdmin, ...props }) => {
          {...props}
          render={() =>
            isAdmin ? (
-             <UserLayout>
+             <AppLayout>
                <Component />
-             </UserLayout>
+             </AppLayout>
            ) : (
              <></>
            )
@@ -45,6 +47,10 @@ const AdminLayout = ({ Component, isAdmin, ...props }) => {
 function App() {
      const user = JSON.parse(localStorage.getItem("user"));
      const isAdmin = user && user.maLoaiNguoiDung === "GV";
+     const dispatch = useDispatch();
+    useEffect(() =>{
+      dispatch(authCheckState());
+    }, [authCheckState])
   return (
     <BrowserRouter>
          <Switch>

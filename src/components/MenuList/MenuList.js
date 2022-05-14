@@ -52,7 +52,7 @@ const MenuList = (props) => {
     const {sideOpen, sideDraw} = useSelector((state) => state.addSidebar);
     let collapsed = !sideOpen;
 
-
+    const user = JSON.parse(localStorage.getItem("user"));
     const dispatch = useDispatch()
     
     const handleSidebarClose = () =>{
@@ -120,6 +120,24 @@ const MenuList = (props) => {
     )
   });
 
+  const UsersManage = React.forwardRef(function MyComponent(props, ref) {
+    return (
+      <div {...props} ref={ref}>
+        <Link to="/users-management" className={classes.navlink}>
+          <GmailSidebarItem
+            classes={{ collapsed: classes.collapsed, root: classes.root }}
+            color={"#0099ff"}
+            startIcon={<People className={classes.navIcon} />}
+            label={"Users Manage"}
+            amount={969}
+            {...commonProps("/users-management")}
+            dotOnCollapsed={true}
+          />
+        </Link>
+      </div>
+    );
+  });
+
   return (
     <Box 
     className={classes.container} 
@@ -146,6 +164,15 @@ const MenuList = (props) => {
           <Tooltip title="Courses">
               <Courses />
           </Tooltip>
+
+          {user && user.maLoaiNguoiDung === "GV" ? (
+            <>
+             <Tooltip title="Courses Manage">
+              <UsersManage />
+             </Tooltip>
+            </>
+          ): null}
+
           <Tooltip title="About">
               <About />
           </Tooltip>

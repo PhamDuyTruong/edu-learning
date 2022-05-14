@@ -126,7 +126,7 @@ const UserList = () => {
               color="error"
             >
               <Avatar
-                alt={`Avatar n°${index + 1}`}
+                alt={`Avatar ${index + 1}`}
                 src={
                   index > 69
                     ? null

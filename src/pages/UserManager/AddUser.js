@@ -203,7 +203,7 @@ function AddUser(props) {
       .max(15, "Username must be 15 characters or less")
       .required("Must enter a username"),
     password: Yup.string()
-      .min(3, "Password must be at least 3 characters")
+      .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
     name: Yup.string()
       .min(3, "Name must be at least 3 characters")
@@ -261,7 +261,7 @@ function AddUser(props) {
             )}
 
             <FormikSelect
-              label="Account type"
+              label=""
               name="accountType"
               items={userTypeItems}
               disabled={preview}

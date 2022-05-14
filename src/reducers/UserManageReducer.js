@@ -40,42 +40,42 @@ function fetchUserManage(state = initialState, action){
         case actionTypes.DELETE_USER_START:
             return {...state, error: null, loading: true};
         case actionTypes.DELETE_USER_SUCCESS:
-            return {...state, error: null, success: action.payload.data, loading: false};
+            return {...state, error: null, success: action.payload, loading: false};
         case actionTypes.DELETE_USER_FAIL:
             return {...state, error: null, success: null, loading: null};
         
         case actionTypes.FETCH_COURSE_APPROVAL_PENDING_START:
             return {...state, error: null, loading: true};
         case actionTypes.FETCH_COURSE_APPROVAL_PENDING_SUCCESS:
-            return {...state, error: null, coursesPendingList: action.success.success, selectedUser: action.selectedUser.selectedUser, loading: false}
+            return {...state, error: null, coursesPendingList: action.success, selectedUser: action.selectedUser, loading: false}
         case actionTypes.FETCH_COURSE_APPROVAL_PENDING_FAIL:
             return {...state, error: null, success: null, loading: false};
 
         case actionTypes.APPROVE_COURSE_PENDING_START:
             return {...state, error: null, loading: true};
         case actionTypes.APPROVE_COURSE_PENDING_SUCCESS:
-            return {...state, error: null, success: action.payload.data, loading: false};
+            return {...state, error: null, success: action.payload, loading: false};
         case actionTypes.APPROVE_COURSE_PENDING_FAIL:
             return {...state, error: null, success: null, loading: false}
         
         case actionTypes.FETCH_COURSE_APPROVED_START:
             return {...state, error: null, success: null, loading: true};
         case actionTypes.FETCH_COURSE_APPROVED_SUCCESS:
-            return {...state, error: null, coursesApprovedList: action.success.success,  selectedUser: action.selectedUser.selectedUser, loading: false};
+            return {...state, error: null, coursesApprovedList: action.success,  selectedUser: action.selectedUser, loading: false};
         case actionTypes.FETCH_COURSE_APPROVED_FAIL:
             return {...state, error: null, success: null, loading: false};
         
         case actionTypes.DISAPPROVE_COURSE_START:
             return {...state, error: null, success: null, loading: true};
         case actionTypes.DISAPPROVE_COURSE_SUCCESS:
-            return {...state, error: null, success: action.payload.data, loading: false};
+            return {...state, error: null, success: action.payload, loading: false};
         case actionTypes.DISAPPROVE_COURSE_FAIL:
             return {...state, error: null, success: null, loading: false};
         
         case actionTypes.FETCH_COURSE_NONE_ENROLL_START:
             return {...state, error: null, success: null, loading: true};
         case actionTypes.FETCH_COURSE_NONE_ENROLL_SUCCESS:
-            return {...state, error: null, coursesNoneEnrollList:action.success.success, loading: false};
+            return {...state, error: null, coursesNoneEnrollList:action.success, loading: false};
         case actionTypes.FETCH_COURSE_NONE_ENROLL_FAIL:
             return {...state, error: null, success: null, loading: false}
 

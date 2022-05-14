@@ -1,5 +1,6 @@
 import * as actionTypes from "../constants/UserManagerConstant";
 import ManageUserAPI from '../services/ManageUserAPI';
+import axios from '../services/axios'
 
 export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
   return {
@@ -30,12 +31,12 @@ export const addUserClick = () => {
 
   export const fetchUser = (group) =>{
       return async (dispatch) =>{
-          dispatch({type: actionTypes.ADD_USER_START});
+          dispatch({type: actionTypes.FETCH_USERS_START});
           try{
           const {data} = await ManageUserAPI.onFetchUser(group);
-          dispatch({type: actionTypes.ADD_USER_SUCCESS, payload: {data}})
+          dispatch({type: actionTypes.FETCH_USERS_SUCCESS, payload: {data}})
       }catch(e){
-          dispatch({type: actionTypes.ADD_USER_FAIL})
+          dispatch({type: actionTypes.FETCH_USERS_FAIL})
       }
     }
   }
@@ -43,7 +44,7 @@ export const addUserClick = () => {
   export const fetchCourseApprovalPendingSuccess = (success, selectedUser) => {
     return {
       type: actionTypes.FETCH_COURSE_APPROVAL_PENDING_SUCCESS,
-      success: {success},
+      success: success,
       selectedUser: selectedUser,
     };
   };
@@ -52,28 +53,42 @@ export const addUserClick = () => {
       return async (dispatch) =>{
           dispatch({type: actionTypes.FETCH_COURSE_APPROVAL_PENDING_START});
           const user = JSON.parse(localStorage.getItem("user"));
+          const url = "/QuanLyNguoiDung/LayDanhSachKhoaHocChoXetDuyet";
+          const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          };
           const userData = {
             taiKhoan: selectedUser.taiKhoan,
           };
-          try{
-          const {data} = await ManageUserAPI.onFetchCoursePending(userData);
-          dispatch(fetchCourseApprovalPendingSuccess(data, selectedUser))
-      }catch(e){
+          axios({ method: "post", url, headers, userData })
+          .then((response) => {
+         dispatch(
+          fetchCourseApprovalPendingSuccess(response.data, selectedUser)
+          );
+      }).catch((e) => {
           dispatch({type: actionTypes.FETCH_COURSE_APPROVAL_PENDING_FAIL})
-      }
+      })
     }
   }
 
   export const deleteUser = (selectedUser, group) =>{
       return async (dispatch) =>{
           dispatch({type: actionTypes.DELETE_USER_START});
-          try{
-              const {data} = ManageUserAPI.onDeleteUser(selectedUser);
-              dispatch({type: actionTypes.DELETE_USER_SUCCESS, payload: {data}})
-              dispatch(fetchUser(group))
-          } catch(e){
-             dispatch({type: actionTypes.DELETE_USER_FAIL})
-          }
+          const user = JSON.parse(localStorage.getItem("user"));
+          const url = `/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${selectedUser.taiKhoan}`;
+          const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          };
+          axios({ method: "delete", url, headers })
+          .then((response) => {
+            dispatch({type: actionTypes.DELETE_USER_SUCCESS, payload: response.data});
+            dispatch(fetchUser(group));
+          })
+          .catch((e) => {
+            dispatch({type: actionTypes.DELETE_USER_FAIL});
+          });
       }
   }
 
@@ -87,7 +102,19 @@ export const addUserClick = () => {
   export const addUser = (values, isEdit, tabIndex, group) =>{
       return async (dispatch) =>{
           dispatch({type: actionTypes.ADD_USER_START});
-          const userData = {
+          const user = JSON.parse(localStorage.getItem("user"));
+
+          let method = "post";
+          let url = "/QuanLyNguoiDung/ThemNguoiDung";
+          if (isEdit) {
+            method = "put";
+            url = "/QuanLyNguoiDung/CapNhatThongTinNguoiDung";
+          }
+          const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          };
+          const data = {
             taiKhoan: values.username,
             matKhau: values.password,
             hoTen: values.name,
@@ -95,33 +122,36 @@ export const addUserClick = () => {
             maNhom: values.group,
             email: values.email,
             maLoaiNguoiDung: values.accountType,
-          }
-          try{
-          if(isEdit){
-            const {data} = await ManageUserAPI.onEditUser(userData);
-            dispatch( addUserSuccess(
-                `Cập nhật tài khoản ${data.taiKhoan} thành công!`));
-            dispatch(fetchUser(group));
-            dispatch(editCourseClick(data, tabIndex))
-          }else{
-              const {data} = await ManageUserAPI.onAddUser(userData);
-              dispatch(
-                addUserSuccess(
-                  `Thêm tài khoản ${data.taiKhoan} thành công!`
-                )
-              );
-              dispatch(fetchUser(group));
-          }
-        }catch(e){
-            dispatch({type: actionTypes.ADD_USER_FAIL});
-        }
+          };
+          axios({ method, url, headers, data })
+            .then((response) => {
+              if (isEdit) {
+                dispatch(
+                  addUserSuccess(
+                    `Cập nhật tài khoản ${response.data.taiKhoan} thành công!`
+                  )
+                );
+                dispatch(fetchUser(group));
+                dispatch(editUserClick(response.data, tabIndex));
+              } else {
+                dispatch(
+                  addUserSuccess(
+                    `Thêm tài khoản ${response.data.taiKhoan} thành công!`
+                  )
+                );
+                dispatch(fetchUser(group));
+              }
+            })
+            .catch((e) => {
+              dispatch({type: actionTypes.ADD_USER_FAIL});
+            });
       }
   };
 
   export const fetchCourseNoneEnrollSuccess = (success, selectedUser) => {
     return {
       type: actionTypes.FETCH_COURSE_NONE_ENROLL_SUCCESS,
-      success: {success},
+      success: success,
       selectedUser: selectedUser,
     };
   };
@@ -129,12 +159,19 @@ export const addUserClick = () => {
   export const fetchCourseNoneEnroll = (selectedUser) =>{
       return async (dispatch) =>{
           dispatch({type: actionTypes.FETCH_COURSE_NONE_ENROLL_START});
-          try{
-             const {data} = await ManageUserAPI.onFetchCourseNoneEnroll(selectedUser);
-             dispatch(fetchCourseNoneEnrollSuccess(data, selectedUser))
-          }catch(e){
+          const user = JSON.parse(localStorage.getItem("user"));
+          const url = `/QuanLyNguoiDung/LayDanhSachKhoaHocChuaGhiDanh?TaiKhoan=${selectedUser.taiKhoan}`;
+          const headers = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.accessToken}`,
+          };
+          axios({ method: "post", url, headers })
+          .then((response) => {
+            dispatch(fetchCourseNoneEnrollSuccess(response.data, selectedUser));
+          })
+          .catch((e) => {
             dispatch({type: actionTypes.FETCH_COURSE_NONE_ENROLL_FAIL});
-          }
+          });
       }
   };
 
@@ -157,7 +194,7 @@ export const addUserClick = () => {
   export const fetchCourseApprovedSuccess = (success, selectedUser) => {
     return {
       type: actionTypes.FETCH_COURSE_APPROVED_SUCCESS,
-      success: {success},
+      success: success,
       selectedUser: selectedUser,
     };
   };
@@ -165,51 +202,73 @@ export const addUserClick = () => {
   export const  fetchCourseApproved = (selectedUser) =>{
         return async (dispatch) =>{
           dispatch({type: actionTypes.FETCH_COURSE_APPROVED_START});
-          const userData = {
+          const user = JSON.parse(localStorage.getItem("user"));
+          const url = "/QuanLyNguoiDung/LayDanhSachKhoaHocDaXetDuyet";
+         const headers = {
+           "Content-Type": "application/json",
+           Authorization: `Bearer ${user.accessToken}`,
+        };
+         const data = {
             taiKhoan: selectedUser.taiKhoan,
           };
-          try{
-              const {data} = ManageUserAPI.onFetchCourseApprove(userData);
-              dispatch(fetchCourseApprovedSuccess(data, selectedUser))
-          }catch(e){
-              dispatch({type: actionTypes.FETCH_COURSE_APPROVED_FAIL})
-          }
+          axios({ method: "post", url, headers, data })
+          .then((response) => {
+            dispatch(fetchCourseApprovedSuccess(response.data, selectedUser));
+          })
+          .catch((error) => {
+            dispatch({type: actionTypes.FETCH_COURSE_APPROVED_FAIL});
+          });
         }
   }
 
   export const  approveCoursePending = (courseId, selectedUser) =>{
     return async (dispatch) =>{
         dispatch({type: actionTypes.APPROVE_COURSE_PENDING_START});
-        const userData = {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const url = "/QuanLyKhoaHoc/GhiDanhKhoaHoc";
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.accessToken}`,
+        };
+        const data = {
           maKhoaHoc: courseId,
           taiKhoan: selectedUser.taiKhoan,
         };
-        try{
-          const {data} = ManageUserAPI.onApproveCoursePending(userData);
-          dispatch({type: actionTypes.APPROVE_COURSE_PENDING_SUCCESS, payload: {data}});
+        axios({ method: "post", url, headers, data })
+        .then((response) => {
+          dispatch({type: actionTypes.APPROVE_COURSE_PENDING_SUCCESS, payload: response.data});
           dispatch(fetchCourseApprovalPending(selectedUser));
           dispatch(fetchCourseApproved(selectedUser));
           dispatch(fetchCourseNoneEnroll(selectedUser));
-        }catch(e){
+        })
+        .catch((e) => {
+          //console.log(error.response.data);
           dispatch({type: actionTypes.APPROVE_COURSE_PENDING_FAIL});
-        }
+        });
     }
 }
 
 export const disapproveCourse  = (courseId, selectedUser) =>{
     return async (dispatch) =>{
       dispatch({type: actionTypes.DISAPPROVE_COURSE_START});
-      const userData = {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const url = "/QuanLyKhoaHoc/HuyGhiDanh";
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.accessToken}`,
+      };
+      const data = {
         maKhoaHoc: courseId,
         taiKhoan: selectedUser.taiKhoan,
       };
-      try{
-          const {data} = ManageUserAPI.onDisaprovedCourse(userData);
-          dispatch({type: actionTypes.DISAPPROVE_COURSE_SUCCESS, payload: {data}});
-          dispatch(fetchCourseApproved(selectedUser));
-          dispatch(fetchCourseApprovalPending(selectedUser));
-      }catch(e){
-          dispatch({type: actionTypes.DISAPPROVE_COURSE_FAIL})
-      }
+      axios({ method: "post", url, headers, data })
+      .then((response) => {
+        dispatch({type: actionTypes.DISAPPROVE_COURSE_SUCCESS, payload: response.data});
+        dispatch(fetchCourseApproved(selectedUser));
+        dispatch(fetchCourseApprovalPending(selectedUser));
+      })
+      .catch((e) => {
+        dispatch({type: actionTypes.DISAPPROVE_COURSE_FAIL});
+      });
     }
 }

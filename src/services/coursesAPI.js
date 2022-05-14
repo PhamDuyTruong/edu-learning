@@ -21,7 +21,7 @@ const coursesAPI ={
     },
     getCourseAll: (courseType, group, keyword) =>{
         if (group === undefined) {
-            group = "GP08";
+            group = "GP01";
           };
           let url = "/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=" + courseType + "&MaNhom=" +group;
           if (courseType === "all") {

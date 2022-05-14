@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       flex: 3,
       minWidth: 350,
       overflowY: "auto",
-      background: "linear-gradient(45deg, gold 50%, black 50%)",
+      background: "linear-gradient(45deg, #7FB5FF 50%, white 50%)",
       "@media (min-width: 756px)": {
         height: "92.4vh",
       },

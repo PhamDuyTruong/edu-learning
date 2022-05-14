@@ -58,7 +58,7 @@ const Info = () => {
                   variant="contained"
                   color="primary"
                   component={Link}
-                  to={"/sign-in"}
+                  to={"/sign-up"}
                   style={{ width: 150 }}
                   className={classes.buttonSign}
                 >
@@ -67,7 +67,7 @@ const Info = () => {
                 <Button
                   variant="outlined"
                   component={Link}
-                  to={"/sing-up"}
+                  to={"/sign-in"}
                   style={{ width: 150, marginLeft: 8, color: "inherit" }}
                 >
                   Log in
