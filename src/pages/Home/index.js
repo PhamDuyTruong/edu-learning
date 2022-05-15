@@ -7,6 +7,7 @@ const Home = ({children}) => {
      <>
         <DashBoard />
         {children}
+        
      </>
   )
 }
