@@ -3,6 +3,9 @@ import {lazy, Suspense} from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import AppLayout from "./layouts/AppLayout";
+import PageNotFound from './pages/PageNotFound';
+import {authCheckState} from './actions/authAction'
+
 const About = lazy(() => import("./pages/About"));;
 const Auth = lazy(() => import("./pages/Auth"));;
 const CourseDetail = lazy(() => import("./pages/CourseDetail/CourseDetail"));;
@@ -12,8 +15,6 @@ const LogOut= lazy(() => import("./pages/Logout"));
 const UserCourses = lazy(() => import("./pages/UserCourses/UserCourses"));;
 const UserManagement = lazy(() => import("./pages/UserManager/UserManagement"));;
 const CourseManagement = lazy(() => import("./pages/CourseManage/CourseManagement"));;
-import PageNotFound from './pages/PageNotFound';
-import {authCheckState} from './actions/authAction'
 
 const AdminLayout = ({ Component, isAdmin, ...props }) => {
      return (
