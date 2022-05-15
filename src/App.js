@@ -1,5 +1,6 @@
-import {useEffect} from 'react'
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {useEffect} from 'react';
+import {lazy, Suspense} from 'react'
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import AppLayout from "./layouts/AppLayout";
 import About from "./pages/About";
@@ -11,6 +12,7 @@ import LogOut from './pages/Logout'
 import UserCourses from "./pages/UserCourses/UserCourses";
 import UserManagement from "./pages/UserManager/UserManagement";
 import CourseManagement from './pages/CourseManage/CourseManagement';
+import PageNotFound from './pages/PageNotFound';
 import {auth, authCheckState} from './actions/authAction'
 
 const AdminLayout = ({ Component, isAdmin, ...props }) => {
@@ -68,6 +70,9 @@ function App() {
                         <Route path="/sign-up">
                           <Auth />
                        </Route>
+                       <Route path="/not-found">
+                            <PageNotFound />
+                        </Route>
                       </Switch>
                  </AppLayout>
                  <AdminLayout
@@ -80,6 +85,10 @@ function App() {
                     Component={CourseManagement}
                     isAdmin = {isAdmin}
                  />
+                 <Route path="*">
+                    <Redirect to="/not-found" />
+                 </Route>
+                
             </Route>
          </Switch>
     </BrowserRouter>

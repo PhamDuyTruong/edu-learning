@@ -96,7 +96,7 @@ const DropdownMenu = () => {
                className={classes.button}
                component={Link}
                to={"/logout"}
-               style={{color: "#F56D91"}}
+               style={{color: "#6A67CE"}}
             >
               Log out
             </Button>

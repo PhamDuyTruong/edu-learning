@@ -1,0 +1,17 @@
+.mainbox {
+    background-color: #95c2de;
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    position: relative;
+  }
+  .notFoundLink:hover{
+      transition: all .5s;
+      font-weight: bold;
+  }
+
+  @media screen  and (max-width: 650px) {
+      .mainbox{
+          width: 500px;
+      }
+  }

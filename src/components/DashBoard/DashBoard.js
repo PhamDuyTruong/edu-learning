@@ -145,7 +145,7 @@ const DashBoard = () => {
             Learn How To Build Websites & Apps Write A Code Or Start A Business
            </Typography>
            <Button className={classes.button} variant="contained" color="primary" onClick={handleClick}>
-            Make a tour
+            Visit Courses
            </Button>
            <CarouselModal isResponsive={matchSM} setIsOpen={setIsOpen} isOpen={isOpen} />
           </Grid>

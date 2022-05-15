@@ -52,7 +52,7 @@ const Description = ({isTheme}) => {
                   Easy to search the topic you want to learn or teaching
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Course Hub is collect on many resourses. People who study at
+                  E-learing is collect on many resourses. People who study at
                   the Course Hub can archive knowledge by join suitable topic.
                 </Typography>
               </Box>
@@ -84,10 +84,10 @@ const Description = ({isTheme}) => {
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Course Hub users easy to achieve the desired skills
+                  E-learning users easy to achieve the desired skills
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Course Hub system is meticulously built to enhance the
+                  E-learing system is meticulously built to enhance the
                   interaction between students and teachers. It provides an
                   authentic and easy experience to gain knowledge as well as
                   help teachers easily access students

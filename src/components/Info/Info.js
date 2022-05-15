@@ -48,7 +48,7 @@ const Info = () => {
               </Box>
              <Box mt={3}>
               <Typography>
-                Simply sign up as a verified user on Course Hub to start to
+                Simply sign up as a verified user on E-learning to start to
                 access many good course resourses.
               </Typography>
              </Box>
