@@ -3,17 +3,17 @@ import {lazy, Suspense} from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import AppLayout from "./layouts/AppLayout";
-import About from "./pages/About";
-import Auth from "./pages/Auth";
-import CourseDetail from "./pages/CourseDetail/CourseDetail";
-import Courses from "./pages/Courses/Courses";
-import Home from "./pages/Home";
-import LogOut from './pages/Logout'
-import UserCourses from "./pages/UserCourses/UserCourses";
-import UserManagement from "./pages/UserManager/UserManagement";
-import CourseManagement from './pages/CourseManage/CourseManagement';
+const About = lazy(() => import("./pages/About"));;
+const Auth = lazy(() => import("./pages/Auth"));;
+const CourseDetail = lazy(() => import("./pages/CourseDetail/CourseDetail"));;
+const Courses = lazy(() => import("./pages/Courses/Courses"));
+const Home = lazy(() => import("./pages/Home"));;
+const LogOut= lazy(() => import("./pages/Logout"));
+const UserCourses = lazy(() => import("./pages/UserCourses/UserCourses"));;
+const UserManagement = lazy(() => import("./pages/UserManager/UserManagement"));;
+const CourseManagement = lazy(() => import("./pages/CourseManage/CourseManagement"));;
 import PageNotFound from './pages/PageNotFound';
-import {auth, authCheckState} from './actions/authAction'
+import {authCheckState} from './actions/authAction'
 
 const AdminLayout = ({ Component, isAdmin, ...props }) => {
      return (
@@ -41,6 +41,9 @@ function App() {
       dispatch(authCheckState());
     }, [authCheckState])
   return (
+    <Suspense fallback={<div>
+      <i className="fa fa-spinner fa-spin" style={{color:"#79DAE8"}}></i>Loading...
+    </div>}>
     <BrowserRouter>
          <Switch>
             <Route path="/">
@@ -70,28 +73,26 @@ function App() {
                         <Route path="/sign-up">
                           <Auth />
                        </Route>
-                       <Route path="/not-found">
+                       <AdminLayout
+                            path="/users-management"
+                           Component={UserManagement}
+                            isAdmin={isAdmin}
+                        />
+                         <AdminLayout 
+                            path="/courses-management"
+                            Component={CourseManagement}
+                           isAdmin = {isAdmin}
+                        />
+                       <Route path="*">
                             <PageNotFound />
                         </Route>
                       </Switch>
                  </AppLayout>
-                 <AdminLayout
-                  path="/users-management"
-                  Component={UserManagement}
-                  isAdmin={isAdmin}
-                  />
-                 <AdminLayout 
-                    path="/courses-management"
-                    Component={CourseManagement}
-                    isAdmin = {isAdmin}
-                 />
-                 <Route path="*">
-                    <Redirect to="/not-found" />
-                 </Route>
-                
             </Route>
+            
          </Switch>
     </BrowserRouter>
+    </Suspense>
   );
 }
 

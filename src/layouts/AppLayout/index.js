@@ -41,7 +41,7 @@ export default function AppLayout({ children }) {
   const classes = useStyles();
   const {sideOpen, sideDraw} = useSelector((state) => state.addSidebar);
   const dispatch = useDispatch();
-  console.log(sideOpen);
+  //console.log(sideOpen);
 
   const onSideOpen = () =>{
     dispatch(openSidebar());

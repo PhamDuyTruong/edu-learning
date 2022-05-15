@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from 'react-redux';
 const DarkThemeButton = () => {
     
   const {darkTheme} = useSelector((state) => state.darktheme);
-  console.log(darkTheme);
+  //console.log(darkTheme);
   const switchStyles = useLovelySwitchStyles();
   const ThemeInLocal = JSON.parse(localStorage.getItem("darkTheme"));
   const dispatch = useDispatch();

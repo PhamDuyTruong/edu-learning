@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = (props) => {
   const classes = useStyles();
   let {openClicked, drawerClicked} = props;
-  console.log("open click: ", openClicked);
+  //console.log("open click: ", openClicked);
   return (
     <>
         <AppBar position="fixed" className={classes.appBar}>
