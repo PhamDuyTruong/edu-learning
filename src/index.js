@@ -13,15 +13,18 @@ import rootReducer from "./reducers";
 
 import thunk from "redux-thunk";
 // Sử dụng middleware
-const middleware = applyMiddleware(thunk);
-
-const enhancer = compose(
-  middleware,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+//const middleware = applyMiddleware(thunk);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const enhancer = compose(
+//   middleware,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
 
 // Tạo store từ reducer
-const store = createStore(rootReducer, enhancer);
+const store = createStore(
+  rootReducer, 
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 
 
