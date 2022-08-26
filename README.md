@@ -1,3 +1,12 @@
+#Edu learning use technologies:
++ CSS / Boostrap 4
++ Material UI
++ Axios
++ React router dom
++ React redux
++ Formik, yup
++ React-reveal
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
