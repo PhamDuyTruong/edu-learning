@@ -20,7 +20,7 @@ import InputField from './InputField';
 import InputSelect from "./InputSelect"
 import DatePicker from './DatePicker';
 import RatingCourse from './Rating';
-
+//Fake data
 const groupItems = [
     { label: "Group 01", value: "GP01" },
     { label: "Group 02", value: "GP02" },

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Header from "../../components/Header/Header";
 import {useSelector, useDispatch} from 'react-redux';
 import { SnackbarProvider } from "notistack";
