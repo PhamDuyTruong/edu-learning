@@ -53,7 +53,7 @@ const Description = ({isTheme}) => {
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
                   E-learing is collect on many resourses. People who study at
-                  the Course Hub can archive knowledge by join suitable topic.
+                  E-learning can archive knowledge by join suitable topic.
                 </Typography>
               </Box>
             </Box>

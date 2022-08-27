@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// Fake data
 const featureList = [
     {
         id: 1,

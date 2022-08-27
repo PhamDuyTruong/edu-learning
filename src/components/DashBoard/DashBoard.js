@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Mern from "../../assets/Images/Mern.png";
-import { Link } from "react-router-dom";
-import {useSelector, useDispatch} from "react-redux"
+import {useSelector} from "react-redux"
 import {useMediaQuery} from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Box, Typography } from "@material-ui/core";
@@ -139,7 +138,7 @@ const DashBoard = () => {
       <Grid container alignItems='center' className={classes.carouselHeader}>
           <Grid item className={classes.carouselContent}>
            <Typography variant="h4" gutterBottom>
-            Learn HTML5 , CSS3 , Web Apps & More
+            Learn HTML5 , CSS3 , Web App & More
            </Typography>
            <Typography variant="subtitle1" gutterBottom>
             Learn How To Build Websites & Apps Write A Code Or Start A Business
