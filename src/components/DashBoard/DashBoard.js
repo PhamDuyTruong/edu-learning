@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
     
 }));
-
+//Fake data
 const slideItems = [
    {
      id: 1,

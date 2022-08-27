@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 import {lazy, Suspense} from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import AppLayout from "./layouts/AppLayout";
 import PageNotFound from './pages/PageNotFound';

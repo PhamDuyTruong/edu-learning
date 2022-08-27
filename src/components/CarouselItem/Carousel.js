@@ -9,6 +9,7 @@ import Course3 from "../../assets/Images/Java.jpg";
 import Course4 from "../../assets/Images/Javascript.jpg";
 import Course5 from "../../assets/Images/Vuejs.jpg";
 
+// fake data
 const carouselList = [
   {
     id: 1,

@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import {useSelector} from 'react-redux';
-import { Box, Divider, Hidden, Menu } from "@material-ui/core";
+import { Box, Divider, Hidden } from "@material-ui/core";
 import { Drawer, SwipeableDrawer } from "@material-ui/core";
 
 import MenuList from "../MenuList/MenuList";

@@ -7,6 +7,7 @@ import Ava2 from "../../assets/Images/Ava2.jpg";
 import Ava3 from "../../assets/Images/Ava3.jpg";
 import Ava4 from "../../assets/Images/Ava4.jpg";
 
+// Fake data
 const feedbackItem = [
   {
     id: 1,

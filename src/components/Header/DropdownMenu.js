@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Menu, Box, useMediaQuery } from "@material-ui/core";
@@ -8,8 +8,6 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import DarkThemeButton from "./DarkThemeButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ArchiveIcon from "@material-ui/icons/Archive";
-import VpnKeyIcon from "@material-ui/icons/VpnKey";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import AvatarItem from './Avatar';
 
 const useStyles = makeStyles((theme) =>({

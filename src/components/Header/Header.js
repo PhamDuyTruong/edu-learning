@@ -5,11 +5,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import DropdownMenu from "./DropdownMenu";
 import Logo from "../../assets/Images/Logo.jpg";
 import { AppBar, Toolbar } from "@material-ui/core";
-import { Hidden, useScrollTrigger } from "@material-ui/core";
+import { Hidden } from "@material-ui/core";
 import { Button, IconButton, Typography } from "@material-ui/core";
-import { Fab, Zoom } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
